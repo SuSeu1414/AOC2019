@@ -10,6 +10,8 @@ public class Day1 {
 
     public void firstPart(){
         masses = FileUtils.loadFileAsIntegerList("day1");
+        int sum = masses.stream().mapToInt(i -> i / 3 - 2).sum();
+        System.out.println(sum);
     }
 
 }
