@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FileUtils {
@@ -35,6 +36,13 @@ public class FileUtils {
         List<String> list = loadFile(name);
         List<Integer> newList = new ArrayList<>();
         list.forEach(s -> newList.add(Integer.parseInt(s)));
+        return newList;
+    }
+
+    public static List<Integer> loadFileAsIntegerListBySplittingALongStringLikeThisFunctionName(String name, String spl){
+        String str = loadFile(name).get(0);
+        List<Integer> newList = new ArrayList<>();
+        Arrays.stream(str.split(spl)).forEach(s -> newList.add(Integer.parseInt(s)));
         return newList;
     }
 }
