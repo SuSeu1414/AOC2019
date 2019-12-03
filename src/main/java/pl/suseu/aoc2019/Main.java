@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
 //        new Day1().firstPart();
 //        new Day1().secondPart();
-        new Day2().firstPart();
+//        new Day2().firstPart();
+        new Day2().secondPart();
     }
 }
