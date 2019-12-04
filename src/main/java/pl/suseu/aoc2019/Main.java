@@ -2,6 +2,8 @@ package pl.suseu.aoc2019;
 
 import pl.suseu.aoc2019.day1.Day1;
 import pl.suseu.aoc2019.day2.Day2;
+import pl.suseu.aoc2019.day3.Day3;
+import pl.suseu.aoc2019.day4.Day4;
 
 public class Main {
 
@@ -9,6 +11,9 @@ public class Main {
 //        new Day1().firstPart();
 //        new Day1().secondPart();
 //        new Day2().firstPart();
-        new Day2().secondPart();
+//        new Day2().secondPart();
+//        new Day3().firstPart();
+/*        new Day4().firstPart();*/
+        new Day4().secondPart();
     }
 }
