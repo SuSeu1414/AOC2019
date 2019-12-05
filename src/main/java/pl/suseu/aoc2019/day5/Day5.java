@@ -1,8 +1,7 @@
 package pl.suseu.aoc2019.day5;
 
 import pl.suseu.aoc2019.FileUtils;
-import pl.suseu.aoc2019.day5.computer.Emulator;
-import pl.suseu.aoc2019.day5.util.Utils;
+import pl.suseu.aoc2019.day5.emulator.Emulator;
 
 import java.util.List;
 

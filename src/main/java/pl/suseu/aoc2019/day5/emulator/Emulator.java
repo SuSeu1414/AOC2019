@@ -1,4 +1,4 @@
-package pl.suseu.aoc2019.day5.computer;
+package pl.suseu.aoc2019.day5.emulator;
 
 import pl.suseu.aoc2019.day5.util.Utils;
 
