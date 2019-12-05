@@ -1,7 +1,5 @@
 package pl.suseu.aoc2019.day5.emulator;
 
-import pl.suseu.aoc2019.day5.emulator.opcodes.OpcodeRunnable;
-
 public enum Opcode {
 
     ERROR(-1, 0, (emulator, args) -> {

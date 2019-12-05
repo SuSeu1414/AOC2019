@@ -1,4 +1,4 @@
-package pl.suseu.aoc2019.day5.emulator.opcodes;
+package pl.suseu.aoc2019.day5.emulator;
 
 import pl.suseu.aoc2019.day5.emulator.Argument;
 import pl.suseu.aoc2019.day5.emulator.Emulator;
