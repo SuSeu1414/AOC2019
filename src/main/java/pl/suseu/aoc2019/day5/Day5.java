@@ -8,9 +8,13 @@ import java.util.List;
 
 public class Day5 {
 
-    List<Integer> program = FileUtils.loadFileAsIntegerListBySplittingALongStringLikeThisFunctionName("day5", ",");
+    private List<Integer> program = FileUtils.loadFileAsIntegerListBySplittingALongStringLikeThisFunctionName("day5", ",");
 
     public void firstPart(){
         new Emulator(program.stream().mapToInt(i -> i).toArray()).run(1);
+    }
+
+    public void secondPart(){
+        new Emulator(program.stream().mapToInt(i -> i).toArray()).run(5);
     }
 }

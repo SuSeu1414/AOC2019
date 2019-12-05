@@ -34,6 +34,34 @@ public enum Opcode {
         System.out.println("OUTPUT: " + emulator.getValueFromMemory(args[0]));
     }),
 
+    JUMP_IF_TRUE(5, 2, (emulator, args) -> {
+        boolean condition = emulator.getValueFromMemory(args[0]) != 0;
+        if(condition)
+            emulator.setPc(emulator.getValueFromMemory(args[1]));
+    }),
+
+    JUMP_IF_FALSE(6, 2, (emulator, args) -> {
+        boolean condition = emulator.getValueFromMemory(args[0]) == 0;
+        if(condition)
+            emulator.setPc(emulator.getValueFromMemory(args[1]));
+    }),
+
+    LESS_THAN(7, 3, (emulator, args) -> {
+        int first = emulator.getValueFromMemory(args[0]);
+        int second = emulator.getValueFromMemory(args[1]);
+        int pos = args[2].getValue();
+
+        emulator.getMemory()[pos] = first < second ? 1 : 0;
+    }),
+
+    EQUALS(8, 3, (emulator, args) -> {
+        int first = emulator.getValueFromMemory(args[0]);
+        int second = emulator.getValueFromMemory(args[1]);
+        int pos = args[2].getValue();
+
+        emulator.getMemory()[pos] = first == second ? 1 : 0;
+    }),
+
     HALT(99, 0, (emulator, args) -> {
         System.out.println("Finished with code " + emulator.getMemory()[0]);
         System.exit(-1);
