@@ -41,7 +41,37 @@ public class Day6 {
     }
 
     public void secondPart() {
+        loadInput();
+        List<String> you = getAllIndirectOrbits("YOU");
+        List<String> san = getAllIndirectOrbits("SAN");
+        String meetAt = "";
 
+        for (String s : san) {
+            if (you.contains(s)) {
+                meetAt = s;
+                break;
+            }
+        }
+
+        int dis = countOrbits("YOU" , meetAt) + countOrbits("SAN", meetAt) - 2;
+        System.out.println(dis);
+    }
+
+    public List<String> getAllIndirectOrbits(String planet) {
+        if (planet.equals("COM")) return new ArrayList<>();
+
+        List<String> orbs = new ArrayList<>();
+
+        new HashMap<>(orbits).forEach((key, value) -> {
+            if (value.contains(planet))
+                orbs.add(key);
+        });
+
+        if (orbs.isEmpty()) return orbs;
+
+        String pl = orbs.get(0);
+        orbs.addAll(getAllIndirectOrbits(pl));
+        return orbs;
     }
 
     public int countOrbits(String id, String planet) {

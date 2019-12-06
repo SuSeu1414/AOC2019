@@ -19,6 +19,7 @@ public class Main {
 //        new Day4().secondPart();
 //        new Day5().firstPart();
 //        new Day5().secondPart();
-        new Day6().firstPart();
+//        new Day6().firstPart();
+        new Day6().secondPart();
     }
 }
