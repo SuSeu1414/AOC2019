@@ -1,4 +1,4 @@
-package pl.suseu.aoc2019.day5.emulator;
+package pl.suseu.aoc2019.intcode.emulator;
 
 public enum Opcode {
 
@@ -25,11 +25,12 @@ public enum Opcode {
 
     INPUT(3, 1, (emulator, args) -> {
         int pos = args[0].getValue();
-        emulator.getMemory()[pos] = emulator.getInput();
+        emulator.getMemory()[pos] = emulator.getInputs().remove(0);
     }),
 
     OUTPUT(4, 1, (emulator, args) -> {
-        System.out.println("OUTPUT: " + emulator.getValueFromMemory(args[0]));
+        emulator.getOutputs().add(emulator.getValueFromMemory(args[0]));
+//        System.out.println("OUTPUT: " + emulator.getValueFromMemory(args[0]));
     }),
 
     JUMP_IF_TRUE(5, 2, (emulator, args) -> {
@@ -61,8 +62,9 @@ public enum Opcode {
     }),
 
     HALT(99, 0, (emulator, args) -> {
-        System.out.println("Finished with code " + emulator.getMemory()[0]);
-        System.exit(-1);
+//        System.out.println("Finished with code " + emulator.getMemory()[0]);
+//        System.exit(-1);
+        emulator.setRunning(false);
     });
 
 
@@ -77,7 +79,7 @@ public enum Opcode {
         this.runnable = runnable;
     }
 
-    public void run(Emulator emulator, Argument[] args) {
+    public void run(IntCodeEmulator emulator, Argument[] args) {
         runnable.run(emulator, args);
     }
 

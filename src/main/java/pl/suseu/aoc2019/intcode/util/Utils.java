@@ -1,4 +1,4 @@
-package pl.suseu.aoc2019.day5.util;
+package pl.suseu.aoc2019.intcode.util;
 
 public class Utils {
 

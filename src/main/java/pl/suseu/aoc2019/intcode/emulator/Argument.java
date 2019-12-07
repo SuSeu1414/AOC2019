@@ -1,4 +1,4 @@
-package pl.suseu.aoc2019.day5.emulator;
+package pl.suseu.aoc2019.intcode.emulator;
 
 public class Argument {
 
