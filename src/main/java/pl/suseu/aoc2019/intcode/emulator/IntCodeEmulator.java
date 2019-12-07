@@ -9,12 +9,15 @@ public class IntCodeEmulator {
 
     private boolean running;
     private int pc;
-    private List<Integer> memory;
+    private boolean haltOnOutput;
+    private boolean finished;
+    private ArrayList<Integer> memory;
     private List<Integer> inputs;
     private List<Integer> outputs = new ArrayList<>();
 
-    public IntCodeEmulator(List<Integer> memory, List<Integer> inputs) {
+    public IntCodeEmulator(ArrayList<Integer> memory, List<Integer> inputs, boolean haltOnOutput) {
         pc = 0;
+        this.haltOnOutput = haltOnOutput;
         this.memory = memory;
         this.inputs = inputs;
     }
@@ -22,6 +25,7 @@ public class IntCodeEmulator {
     public IntCodeEmulator run() {
         running = true;
         while (running) {
+            System.out.println("WTF" + memory.get(7));
             fetchOpcode();
         }
         return this;
@@ -34,8 +38,8 @@ public class IntCodeEmulator {
         int op = 10 * Utils.getDigit(opcode, 2) + Utils.getDigit(opcode, 1);
         int[] modes = getModes(opcode);
 
-//        System.out.println("opcode = " + opcode);
-//        System.out.println("op = " + op);
+        System.out.println("opcode = " + opcode);
+        System.out.println("op = " + op);
 
         Opcode opc = Opcode.get(op);
 
@@ -52,6 +56,12 @@ public class IntCodeEmulator {
 
         opc.run(this, args);
 //        System.out.println();
+    }
+
+    public void setMemoryValue(int pos, int value){
+        System.out.println("loool " + pos);
+        Utils.ensureSize(memory, pos+1);
+        memory.set(pos, value);
     }
 
     public int getValueFromMemory(Argument arg) {
@@ -84,7 +94,7 @@ public class IntCodeEmulator {
         this.pc = pc;
     }
 
-    public List<Integer> getMemory() {
+    public ArrayList<Integer> getMemory() {
         return memory;
     }
 
@@ -100,9 +110,27 @@ public class IntCodeEmulator {
         this.running = running;
     }
 
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public boolean isHaltOnOutput() {
+        return haltOnOutput;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
     public static class Builder {
-        private List<Integer> memory;
+        private ArrayList<Integer> memory;
         private List<Integer> inputs = new ArrayList<>();
+
+        private boolean haltOnOutput;
 
         private boolean useVerb;
         private int verb;
@@ -113,13 +141,18 @@ public class IntCodeEmulator {
         public Builder(){ }
 
         public IntCodeEmulator build(){
-            IntCodeEmulator emulator = new IntCodeEmulator(memory, inputs);
+            IntCodeEmulator emulator = new IntCodeEmulator(memory, inputs, haltOnOutput);
             if (useNoun) emulator.getMemory().set(1, noun);
             if (useVerb) emulator.getMemory().set(2, verb);
             return emulator;
         }
 
-        public Builder setMemory(List<Integer> memory) {
+        public Builder setHaltOnOutput(boolean haltOnOutput) {
+            this.haltOnOutput = haltOnOutput;
+            return this;
+        }
+
+        public Builder setMemory(ArrayList<Integer> memory) {
             this.memory = memory;
             return this;
         }

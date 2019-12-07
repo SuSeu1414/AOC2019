@@ -36,4 +36,27 @@ public class Day7 {
 //        Cluster cluster = new Cluster(5, Arrays.asList(4,3,2,1,0), program);
 //        cluster.run();
     }
+
+    public void secondPart(){
+        int max = 0;
+        loop:
+        for (int i = 55555; i < 100000; i++) {
+            List<Integer> options = new ArrayList<>();
+            for (int j = 1; j <= 5; j++) {
+                options.add(Utils.getDigit(i, j));
+            }
+
+            for (int o : options) {
+                if (o < 5) continue loop;
+                if (options.size() != new HashSet<>(options).size()) continue loop;
+            }
+
+            Cluster cluster = new Cluster(5, new ArrayList<>(options), program);
+            System.out.println(i);
+            int result = cluster.run();
+            if (result > max) max = result;
+        }
+
+        System.out.println("DONE " + max);
+    }
 }
