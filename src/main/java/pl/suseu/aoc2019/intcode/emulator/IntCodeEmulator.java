@@ -9,11 +9,11 @@ public class IntCodeEmulator {
 
     private boolean running;
     private int pc;
-    private int[] memory;
+    private List<Integer> memory;
     private List<Integer> inputs;
     private List<Integer> outputs = new ArrayList<>();
 
-    public IntCodeEmulator(int[] memory, List<Integer> inputs) {
+    public IntCodeEmulator(List<Integer> memory, List<Integer> inputs) {
         pc = 0;
         this.memory = memory;
         this.inputs = inputs;
@@ -30,7 +30,7 @@ public class IntCodeEmulator {
     public void fetchOpcode() {
 //        System.out.println("pc = " + pc);
 
-        int opcode = memory[pc];
+        int opcode = memory.get(pc);
         int op = 10 * Utils.getDigit(opcode, 2) + Utils.getDigit(opcode, 1);
         int[] modes = getModes(opcode);
 
@@ -41,7 +41,7 @@ public class IntCodeEmulator {
 
         Argument[] args = new Argument[opc.getArgsLength()];
         for (int i = 1; i <= opc.getArgsLength(); i++) {
-            Argument arg = new Argument(memory[pc + i], modes[i]);
+            Argument arg = new Argument(memory.get(pc + i), modes[i]);
             args[i - 1] = arg;
 
 //            System.out.println("args[" + (i - 1) + "]=" + arg.getValue()
@@ -59,7 +59,7 @@ public class IntCodeEmulator {
     }
 
     public int getValueFromMemory(int val, int mode) {
-        return mode == 0 ? memory[val] : val;
+        return mode == 0 ? memory.get(val) : val;
     }
 
     private static int[] getModes(int opcode) {
@@ -84,7 +84,7 @@ public class IntCodeEmulator {
         this.pc = pc;
     }
 
-    public int[] getMemory() {
+    public List<Integer> getMemory() {
         return memory;
     }
 
@@ -101,7 +101,7 @@ public class IntCodeEmulator {
     }
 
     public static class Builder {
-        private int[] memory;
+        private List<Integer> memory;
         private List<Integer> inputs = new ArrayList<>();
 
         private boolean useVerb;
@@ -114,12 +114,12 @@ public class IntCodeEmulator {
 
         public IntCodeEmulator build(){
             IntCodeEmulator emulator = new IntCodeEmulator(memory, inputs);
-            if (useNoun) emulator.getMemory()[1] = noun;
-            if (useVerb) emulator.getMemory()[2] = verb;
+            if (useNoun) emulator.getMemory().set(1, noun);
+            if (useVerb) emulator.getMemory().set(2, verb);
             return emulator;
         }
 
-        public Builder setMemory(int[] memory) {
+        public Builder setMemory(List<Integer> memory) {
             this.memory = memory;
             return this;
         }
