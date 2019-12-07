@@ -48,7 +48,7 @@ public enum Opcode {
     LESS_THAN(7, 3, (emulator, args) -> {
         int first = emulator.getValueFromMemory(args[0]);
         int second = emulator.getValueFromMemory(args[1]);
-        int pos = args[2].getValue();
+        int pos = emulator.getValueFromMemory(args[2]);
 
         emulator.getMemory().set(pos, first < second ? 1 : 0);
     }),
@@ -56,7 +56,7 @@ public enum Opcode {
     EQUALS(8, 3, (emulator, args) -> {
         int first = emulator.getValueFromMemory(args[0]);
         int second = emulator.getValueFromMemory(args[1]);
-        int pos = args[2].getValue();
+        int pos = emulator.getValueFromMemory(args[2]);
 
         emulator.getMemory().set(pos, first == second ? 1 : 0);
     }),

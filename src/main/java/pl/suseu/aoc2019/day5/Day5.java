@@ -15,7 +15,6 @@ public class Day5 {
     }
 
     public void secondPart(){
-        int[] memory = program.stream().mapToInt(i -> i).toArray();
         System.out.println(new IntCodeEmulator.Builder().setMemory(new ArrayList<>(program)).addInputs(5).build().run().getLastOutput());
     }
 }
