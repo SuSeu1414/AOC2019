@@ -25,7 +25,6 @@ public class IntCodeEmulator {
     public IntCodeEmulator run() {
         running = true;
         while (running) {
-            System.out.println("WTF" + memory.get(7));
             fetchOpcode();
         }
         return this;
@@ -38,8 +37,8 @@ public class IntCodeEmulator {
         int op = 10 * Utils.getDigit(opcode, 2) + Utils.getDigit(opcode, 1);
         int[] modes = getModes(opcode);
 
-        System.out.println("opcode = " + opcode);
-        System.out.println("op = " + op);
+//        System.out.println("opcode = " + opcode);
+//        System.out.println("op = " + op);
 
         Opcode opc = Opcode.get(op);
 
@@ -59,7 +58,6 @@ public class IntCodeEmulator {
     }
 
     public void setMemoryValue(int pos, int value){
-        System.out.println("loool " + pos);
         Utils.ensureSize(memory, pos+1);
         memory.set(pos, value);
     }

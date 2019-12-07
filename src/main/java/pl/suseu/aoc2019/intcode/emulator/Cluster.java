@@ -21,7 +21,7 @@ public class Cluster {
     }
 
     public int run() {
-        System.out.println("Running a cluster...");
+//        System.out.println("Running a cluster...");
 //        long start = System.currentTimeMillis();
 //        options.forEach(System.out::println);
         lastOutput = 0;
@@ -37,7 +37,6 @@ public class Cluster {
 //            System.out.println("Running emulator(" + i + ")...");
                 lastOutput = emulator.run().getLastOutput();
                 if (emulator.isFinished()) {
-                    System.out.println("sdgsdg");
                     break loop;
                 }
             }
